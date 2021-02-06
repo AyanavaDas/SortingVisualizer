@@ -19,6 +19,7 @@ public class GenerateArray : MonoBehaviour
     }
     IEnumerator merge(int l,int m,int r, GameObject[] Arr)
     {
+        //yield return new WaitForSeconds(1);
         GameObject[] L, R;
         int n1 = m - l + 1, n2 = r - m;
         L = new GameObject[m - l + 1];
@@ -56,7 +57,7 @@ public class GenerateArray : MonoBehaviour
             Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, L[i].transform.localScale.y, Arr[k].transform.localScale.z);
             
             Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, L[i].transform.localScale.y / 2, Arr[k].transform.position.z);
-            //Arr[k] = L[i];
+            
             i++;
             k++;
 
@@ -67,7 +68,7 @@ public class GenerateArray : MonoBehaviour
             Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
 
             Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, R[j].transform.localScale.y / 2, Arr[k].transform.position.z);
-            //Arr[k] = R[j];
+            
             j++;
             k++;
 

@@ -39,14 +39,14 @@ public class GenerateArray : MonoBehaviour
             if(L[i].transform.localScale.y<=R[j].transform.localScale.y)
             {
                 Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x,L[i].transform.localScale.y,Arr[k].transform.localScale.z);
-                Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, L[i].transform.localScale.y / 2, Arr[k].transform.position.z);
+                Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
                 i++;
             }
             else
             {
                 Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
-                
-                Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, R[j].transform.localScale.y / 2, Arr[k].transform.position.z);
+
+                Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
                 j++;
             }
             k++;
@@ -56,7 +56,7 @@ public class GenerateArray : MonoBehaviour
             yield return new WaitForSeconds(1);
             Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, L[i].transform.localScale.y, Arr[k].transform.localScale.z);
             
-            Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, L[i].transform.localScale.y / 2, Arr[k].transform.position.z);
+            Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
             
             i++;
             k++;
@@ -67,7 +67,7 @@ public class GenerateArray : MonoBehaviour
             yield return new WaitForSeconds(1);
             Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
 
-            Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, R[j].transform.localScale.y / 2, Arr[k].transform.position.z);
+            Arr[k].transform.localPosition= new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
             
             j++;
             k++;

@@ -15,8 +15,79 @@ public class GenerateArray : MonoBehaviour
     void Start()
     {
         Init();
+        mergeSort(0,SizeofArray-1,Array);
     }
+    IEnumerator merge(int l,int m,int r, GameObject[] Arr)
+    {
+        GameObject[] L, R;
+        int n1 = m - l + 1, n2 = r - m;
+        L = new GameObject[m - l + 1];
+        R = new GameObject[r - m];
+        for(int a=0;a<n1;a++ )
+        {
+            L[a] = Arr[l + a];
+        }
+        for(int a=0;a<n2;a++)
+        {
+            R[a] = Arr[m + 1 + a];
+        }
+        int i = 0, j = 0, k = l;
+        while(i<n1&&j<n2)
+        {
+            yield return new WaitForSeconds(1);
+            if(L[i].transform.localScale.y<=R[j].transform.localScale.y)
+            {
+                Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x,L[i].transform.localScale.y,Arr[k].transform.localScale.z);
+                Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, L[i].transform.localScale.y / 2, Arr[k].transform.position.z);
+                i++;
+            }
+            else
+            {
+                Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
+                
+                Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, R[j].transform.localScale.y / 2, Arr[k].transform.position.z);
+                j++;
+            }
+            k++;
+        }
+        while(i<n1)
+        {
+            yield return new WaitForSeconds(1);
+            Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, L[i].transform.localScale.y, Arr[k].transform.localScale.z);
+            
+            Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, L[i].transform.localScale.y / 2, Arr[k].transform.position.z);
+            //Arr[k] = L[i];
+            i++;
+            k++;
 
+        }
+        while(j<n2)
+        {
+            yield return new WaitForSeconds(1);
+            Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
+
+            Arr[k].transform.position = new Vector3(Arr[k].transform.position.x, R[j].transform.localScale.y / 2, Arr[k].transform.position.z);
+            //Arr[k] = R[j];
+            j++;
+            k++;
+
+        }
+
+
+    }
+    void mergeSort(int l,int r, GameObject[] Arr)
+    {
+        if(l<r)
+        {
+            int m = l + (r - l) / 2;
+            //yield return new WaitForSeconds(1);
+            mergeSort(l, m,  Arr);
+            mergeSort(m + 1, r,  Arr);
+            StartCoroutine(merge(l, m, r, Arr));
+
+
+        }
+    }
     private void Init()
     {
         Array = new GameObject[SizeofArray];

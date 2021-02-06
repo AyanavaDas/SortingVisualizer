@@ -10,6 +10,7 @@ public class GenerateArray : MonoBehaviour
     [SerializeField] public int SizeofArray = 100;
     [SerializeField] public int initPos = 0;
     [SerializeField] public int initZ = 0;
+    [SerializeField] Material color;
     public GameObject[] Array;
     void Start()
     {
@@ -26,7 +27,10 @@ public class GenerateArray : MonoBehaviour
             GameObject element = GameObject.CreatePrimitive(PrimitiveType.Cube);
             element.transform.localScale= new Vector3(0.85f,randomHeight,1f);
             element.transform.position = new Vector3(initPos+i,randomHeight/2,initZ);
+            element.transform.parent = this.transform;
+            Array[i] = element;
 
+            
         }
     }
 

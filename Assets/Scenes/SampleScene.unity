@@ -410,7 +410,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be46f1e00bc6ef248943681c27f6fcd0, type: 2}
+  - {fileID: 2100000, guid: 3ba6e8af4fde98f45b90ee3291682e30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,6 +487,7 @@ MonoBehaviour:
   SizeofArray: 100
   initPos: 0
   initZ: 0
+  color: {fileID: 2100000, guid: 3ba6e8af4fde98f45b90ee3291682e30, type: 2}
   Array: []
 --- !u!4 &2044488114
 Transform:

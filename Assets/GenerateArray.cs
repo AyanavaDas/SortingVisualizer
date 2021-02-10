@@ -7,7 +7,7 @@ public class GenerateArray : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] public int Height = 100;
-    [SerializeField] public int SizeofArray = 100;
+    [SerializeField] public int SizeofArray = 25;
     [SerializeField] public int initPos = 0;
     [SerializeField] public int initZ = 0;
     [SerializeField] Material color;
@@ -15,7 +15,8 @@ public class GenerateArray : MonoBehaviour
     void Start()
     {
         Init();
-        mergeSort(0,SizeofArray-1,Array);
+        //mergeSort(0,SizeofArray-1,Array);
+        StartCoroutine(quicksort(0, SizeofArray - 1, Array));
     }
     IEnumerator merge(int l,int m,int r, GameObject[] Arr)
     {
@@ -89,6 +90,81 @@ public class GenerateArray : MonoBehaviour
 
         }
     }
+
+    IEnumerator quicksort(int l,int r ,GameObject[] Arr)
+    {
+        if(l<r)
+        {
+            int Partition = partititon(l, r, Arr);
+            
+            yield return new WaitForSeconds(1);
+            StartCoroutine(quicksort(l, Partition-1, Arr));
+            yield return new WaitForSeconds(1);
+            StartCoroutine(quicksort(Partition + 1, r, Arr));
+        }
+    }
+
+    private int partititon(int l, int r,  GameObject[] arr)
+    {
+        int pivot = r;
+        int i = l - 1;
+
+        for(int j = l ; j < r; j++ )
+        {
+            if(arr[j].transform.localScale.y<arr[pivot].transform.localScale.y)
+            {
+                //print(j);
+                i++;
+                //print(i);
+
+                GameObject t;
+                print(arr[j].transform.localPosition.x);
+                print(arr[i].transform.localPosition.x);
+                t = arr[j];
+                arr[j] = arr[i];
+                arr[i] = t;
+                /*print(arr[j].transform.localPosition.x);
+                print(arr[i].transform.localPosition.x);*/
+                Vector3 temp= arr[j].transform.localPosition;
+                //print(temp.x);
+                //print(arr[i].transform.localPosition.x);
+                arr[j].transform.localPosition = 
+                    new Vector3(arr[i].transform.localPosition.x, temp.y, temp.z);
+                arr[i].transform.localPosition = 
+                    new Vector3(temp.x, arr[i].transform.localPosition.y, arr[i].transform.localPosition.z);
+                
+
+                /*LeanTween.moveLocalX(arr[j], arr[i].transform.localPosition.x, 1);
+                LeanTween.moveLocalZ(arr[j], -3, 0.5f).setLoopPingPong(1);
+                LeanTween.moveLocalX(arr[i], temp.x, 1);
+                LeanTween.moveLocalZ(arr[i], 3, 0.5f).setLoopPingPong(1);
+                */
+                //print(arr[j].transform.localPosition.x);
+                //print(arr[i].transform.localPosition.x);
+                //print("Swapped");
+            }
+        }
+        GameObject T;
+        T = arr[i + 1];
+        arr[i + 1] = arr[pivot];
+        arr[pivot] = T;
+
+        Vector3 Temp = arr[i+1].transform.localPosition;
+        arr[i + 1].transform.localPosition = 
+            new Vector3(arr[pivot].transform.localPosition.x, Temp.y, Temp.z);
+        arr[pivot].transform.localPosition = 
+            new Vector3(Temp.x, arr[pivot].transform.localPosition.y, arr[pivot].transform.localPosition.z);
+
+        
+        /*LeanTween.moveLocalX(arr[i+1], arr[pivot].transform.localPosition.x, 1);
+        LeanTween.moveLocalZ(arr[i+1], -3, 0.5f).setLoopPingPong(1);
+        LeanTween.moveLocalX(arr[pivot], Temp.x, 1);
+        LeanTween.moveLocalZ(arr[pivot], 3, 0.5f).setLoopPingPong(1);
+        */
+        return (i + 1);
+        
+    }
+
     private void Init()
     {
         Array = new GameObject[SizeofArray];
@@ -98,12 +174,13 @@ public class GenerateArray : MonoBehaviour
 
             GameObject element = GameObject.CreatePrimitive(PrimitiveType.Cube);
             element.transform.localScale= new Vector3(0.85f,randomHeight,1f);
-            element.transform.position = new Vector3(initPos+i,randomHeight/2,initZ);
+            element.transform.position = new Vector3(i,randomHeight/2,0);
             element.transform.parent = this.transform;
             Array[i] = element;
 
             
         }
+        transform.position = new Vector3(-SizeofArray / 2f, -Height / 2f, 0);
     }
 
     // Update is called once per frame

@@ -12,7 +12,7 @@ public class GenerateArray : MonoBehaviour
     [SerializeField] public int initZ = 0;
     [SerializeField] Material color;
     public GameObject[] Array;
-    void Start()
+     public void StartQuickSort()
     {
         Init();
         //mergeSort(0,SizeofArray-1,Array);
@@ -122,6 +122,7 @@ public class GenerateArray : MonoBehaviour
                 //print(i);
                 Invoke("delay", 1.5f);
                 GameObject t;
+                
                 print(arr[j].transform.localPosition.x);
                 print(arr[i].transform.localPosition.x);
                 t = arr[j];
@@ -188,9 +189,4 @@ public class GenerateArray : MonoBehaviour
         transform.position = new Vector3(-SizeofArray / 2f, -Height / 2f, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

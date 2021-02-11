@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Height: 100
-  SizeofArray: 100
+  SizeofArray: 125
   initPos: 0
   initZ: 0
   color: {fileID: 2100000, guid: 3ba6e8af4fde98f45b90ee3291682e30, type: 2}

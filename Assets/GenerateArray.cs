@@ -18,6 +18,10 @@ public class GenerateArray : MonoBehaviour
         //mergeSort(0,SizeofArray-1,Array);
         StartCoroutine(quicksort(0, SizeofArray - 1, Array));
     }
+    void delay()
+    {
+        return;
+    }
     IEnumerator merge(int l,int m,int r, GameObject[] Arr)
     {
         //yield return new WaitForSeconds(1);
@@ -97,9 +101,9 @@ public class GenerateArray : MonoBehaviour
         {
             int Partition = partititon(l, r, Arr);
             
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
             StartCoroutine(quicksort(l, Partition-1, Arr));
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
             StartCoroutine(quicksort(Partition + 1, r, Arr));
         }
     }
@@ -116,7 +120,7 @@ public class GenerateArray : MonoBehaviour
                 //print(j);
                 i++;
                 //print(i);
-
+                Invoke("delay", 1.5f);
                 GameObject t;
                 print(arr[j].transform.localPosition.x);
                 print(arr[i].transform.localPosition.x);
@@ -144,6 +148,7 @@ public class GenerateArray : MonoBehaviour
                 //print("Swapped");
             }
         }
+        Invoke("delay", 1.5f);
         GameObject T;
         T = arr[i + 1];
         arr[i + 1] = arr[pivot];

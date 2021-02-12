@@ -818,7 +818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reset
+  m_Text: RESET
 --- !u!222 &1146197073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Do a quick sort !
+  m_Text: QUICK SORT
 --- !u!222 &1690771289
 CanvasRenderer:
   m_ObjectHideFlags: 0

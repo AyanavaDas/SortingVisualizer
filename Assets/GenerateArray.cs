@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class GenerateArray : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
     [SerializeField] public int Height = 100;
     [SerializeField] public int SizeofArray = 25;
-    [SerializeField] public int initPos = 0;
-    [SerializeField] public int initZ = 0;
-    [SerializeField] Material color;
+    //[SerializeField] public int initPos = 0;
+    //[SerializeField] public int initZ = 0;
+    //[SerializeField] Material color;
     public GameObject[] Array;
      public void StartQuickSort()
     {
@@ -120,36 +120,24 @@ public class GenerateArray : MonoBehaviour
                 //print(j);
                 i++;
                 //print(i);
+                
                 Invoke("delay", 1.5f);
                 GameObject t;
                 
-                print(arr[j].transform.localPosition.x);
-                print(arr[i].transform.localPosition.x);
                 t = arr[j];
                 arr[j] = arr[i];
                 arr[i] = t;
-                /*print(arr[j].transform.localPosition.x);
-                print(arr[i].transform.localPosition.x);*/
                 Vector3 temp= arr[j].transform.localPosition;
-                //print(temp.x);
-                //print(arr[i].transform.localPosition.x);
                 arr[j].transform.localPosition = 
                     new Vector3(arr[i].transform.localPosition.x, temp.y, temp.z);
                 arr[i].transform.localPosition = 
                     new Vector3(temp.x, arr[i].transform.localPosition.y, arr[i].transform.localPosition.z);
-                
 
-                /*LeanTween.moveLocalX(arr[j], arr[i].transform.localPosition.x, 1);
-                LeanTween.moveLocalZ(arr[j], -3, 0.5f).setLoopPingPong(1);
-                LeanTween.moveLocalX(arr[i], temp.x, 1);
-                LeanTween.moveLocalZ(arr[i], 3, 0.5f).setLoopPingPong(1);
-                */
-                //print(arr[j].transform.localPosition.x);
-                //print(arr[i].transform.localPosition.x);
-                //print("Swapped");
+
             }
         }
         Invoke("delay", 1.5f);
+
         GameObject T;
         T = arr[i + 1];
         arr[i + 1] = arr[pivot];
@@ -161,12 +149,6 @@ public class GenerateArray : MonoBehaviour
         arr[pivot].transform.localPosition = 
             new Vector3(Temp.x, arr[pivot].transform.localPosition.y, arr[pivot].transform.localPosition.z);
 
-        
-        /*LeanTween.moveLocalX(arr[i+1], arr[pivot].transform.localPosition.x, 1);
-        LeanTween.moveLocalZ(arr[i+1], -3, 0.5f).setLoopPingPong(1);
-        LeanTween.moveLocalX(arr[pivot], Temp.x, 1);
-        LeanTween.moveLocalZ(arr[pivot], 3, 0.5f).setLoopPingPong(1);
-        */
         return (i + 1);
         
     }

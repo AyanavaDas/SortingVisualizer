@@ -18,62 +18,85 @@ public class GenerateArray : MonoBehaviour
         //mergeSort(0,SizeofArray-1,Array);
         StartCoroutine(quicksort(0, SizeofArray - 1, Array));
     }
+    public void StartMergeSort()
+    {
+        Init();
+        mergeSort(0, SizeofArray - 1, Array);
+    }
+    private void swap(GameObject [] arr,int i ,int j)
+    {
+        //Invoke("delay", 1.5f);
+        GameObject t;
+
+        t = arr[j];
+        arr[j] = arr[i];
+        arr[i] = t;
+        Vector3 temp = arr[j].transform.localPosition;
+        arr[j].transform.localPosition =
+            new Vector3(arr[i].transform.localPosition.x, temp.y, temp.z);
+        arr[i].transform.localPosition =
+            new Vector3(temp.x, arr[i].transform.localPosition.y, arr[i].transform.localPosition.z);
+
+    }
     void delay()
     {
         return;
     }
-    IEnumerator merge(int l,int m,int r, GameObject[] Arr)
+    void merge(int l,int m,int r, GameObject[] Arr)
     {
         //yield return new WaitForSeconds(1);
-        GameObject[] L, R;
+        int [] L, R;
         int n1 = m - l + 1, n2 = r - m;
-        L = new GameObject[m - l + 1];
-        R = new GameObject[r - m];
+        L = new int[m - l + 1];
+        R = new int[r - m];
         for(int a=0;a<n1;a++ )
         {
-            L[a] = Arr[l + a];
+            L[a] = l + a;
         }
         for(int a=0;a<n2;a++)
         {
-            R[a] = Arr[m + 1 + a];
+            R[a] = m + 1 + a;
         }
         int i = 0, j = 0, k = l;
         while(i<n1&&j<n2)
         {
-            yield return new WaitForSeconds(1);
-            if(L[i].transform.localScale.y<=R[j].transform.localScale.y)
+            //yield return new WaitForSeconds(1);
+            if(Arr[L[i]].transform.localScale.y<=Arr[R[j]].transform.localScale.y)
             {
-                Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x,L[i].transform.localScale.y,Arr[k].transform.localScale.z);
-                Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
+                Arr[k] = Arr[L[i]];
+                //Arr[k].transform.localPosition = Arr[L[i]].transform.position;
+                //swap(Arr, k, L[i]);
                 i++;
             }
             else
             {
-                Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
 
-                Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
+                Arr[k] = Arr[R[j]];
+                //Arr[k].transform.localPosition = Arr[R[j]].transform.position;
+                //swap(Arr, k, R[j]);
+
                 j++;
             }
             k++;
         }
         while(i<n1)
         {
-            yield return new WaitForSeconds(1);
-            Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, L[i].transform.localScale.y, Arr[k].transform.localScale.z);
-            
-            Arr[k].transform.localPosition = new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
-            
+            //yield return new WaitForSeconds(1);
+            //swap(Arr, k, L[i]);
+
+            Arr[k] = Arr[L[i]];
+            //Arr[k].transform.localPosition = Arr[L[i]].transform.position;
             i++;
             k++;
 
         }
         while(j<n2)
         {
-            yield return new WaitForSeconds(1);
-            Arr[k].transform.localScale = new Vector3(Arr[k].transform.localScale.x, R[j].transform.localScale.y, Arr[k].transform.localScale.z);
+            // yield return new WaitForSeconds(1);
 
-            Arr[k].transform.localPosition= new Vector3(Arr[k].transform.localPosition.x, Arr[k].transform.localScale.y / 2, Arr[k].transform.localPosition.z);
-            
+            Arr[k] = Arr[R[j]];
+            //Arr[k].transform.localPosition = Arr[R[j]].transform.position;
+            //swap(Arr, k, R[j]);
             j++;
             k++;
 
@@ -89,8 +112,8 @@ public class GenerateArray : MonoBehaviour
             //yield return new WaitForSeconds(1);
             mergeSort(l, m,  Arr);
             mergeSort(m + 1, r,  Arr);
-            StartCoroutine(merge(l, m, r, Arr));
-
+            //StartCoroutine(merge(l, m, r, Arr));
+            merge(l, m, r, Arr);
 
         }
     }

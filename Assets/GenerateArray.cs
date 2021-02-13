@@ -12,7 +12,18 @@ public class GenerateArray : MonoBehaviour
     //[SerializeField] public int initZ = 0;
     //[SerializeField] Material color;
     public GameObject[] Array;
-     public void StartQuickSort()
+    public void StartSelectionSort()
+    {
+        Init();
+        StartCoroutine(selectionsort(Array));
+    }
+    public void StartBubbleSort()
+    {
+        Init();
+        StartCoroutine(bubblesort(Array));
+
+    }
+    public void StartQuickSort()
     {
         Init();
         //mergeSort(0,SizeofArray-1,Array);
@@ -38,7 +49,7 @@ public class GenerateArray : MonoBehaviour
             new Vector3(temp.x, arr[i].transform.localPosition.y, arr[i].transform.localPosition.z);
 
     }
-    void delay()
+    public void delay()
     {
         return;
     }
@@ -175,7 +186,44 @@ public class GenerateArray : MonoBehaviour
         return (i + 1);
         
     }
-
+    IEnumerator bubblesort(GameObject [] Arr)
+    {
+        for(int i=0;i<SizeofArray-1;i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            for (int j=0;j<SizeofArray-1-i;j++)
+            {
+                
+                if(Arr[j].transform.localScale.y>Arr[j+1].transform.localScale.y)
+                {
+                    //yield return new WaitForSeconds(1);
+                    swap(Arr, j, j + 1);
+                }
+            }
+            LeanTween.color(Arr[SizeofArray - 1 - i], Color.green, 0.5f);
+        }
+        LeanTween.color(Arr[0], Color.green,0.5f);
+    }
+    IEnumerator selectionsort(GameObject[] arr)
+    {
+        int mn;
+        for(int i=0;i<SizeofArray-1;i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            mn = i;
+            for(int j=i+1;j<SizeofArray;j++)
+            {
+                if(arr[j].transform.localScale.y<arr[mn].transform.localScale.y)
+                {
+                    mn = j;
+                }
+                
+            }
+            swap(arr, mn, i);
+            LeanTween.color(arr[i], Color.green, 0.5f);
+        }
+        LeanTween.color(arr[SizeofArray-1], Color.green, 0.5f);
+    }
     private void Init()
     {
         Array = new GameObject[SizeofArray];

@@ -7,13 +7,23 @@ public class menu : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] public GenerateArray script;
     public GenerateArray Activator;
-    public void MergeSort()
+
+    public void SelectionSort()
     {
+        //Destroy(Activator.gameObject);
         Activator = Instantiate(script);
-        Activator.StartMergeSort();
+        Activator.StartSelectionSort();
+
+    }
+    public void BubbleSort()
+    {
+        //Destroy(Activator.gameObject);
+        Activator = Instantiate(script);
+        Activator.StartBubbleSort();
     }
     public void QuickSort()
     {
+        //Destroy(Activator.gameObject);
         Activator = Instantiate(script);
         Activator.StartQuickSort();
 

@@ -28,6 +28,7 @@ public class menu : MonoBehaviour
         Activator.StartQuickSort();
 
     }
+ 
     public void Reset()
     {
         Destroy(Activator.gameObject);
